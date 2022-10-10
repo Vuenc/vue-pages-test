@@ -1,7 +1,34 @@
 <script setup>
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from './components/HelloWorld.vue'
+class Member {
+	constructor(name, studies, imagePath) {
+		this.name = name
+		this.studies = studies
+		this.imagePath = imagePath
+	}
+}
+
+// Taken from https://stackoverflow.com/a/12646864
+// Randomize array in-place using Durstenfeld shuffle algorithm
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+let members = [
+	new Member("Johannes Frey", "Master of Science (M.Sc.) Robotics, Cognition, Intelligence", "images/people/JohannesFrey-MA-RCI.jpg"),
+	new Member("Leon Kiesgen", "Master of Science (M.Sc.) Robotics, Cognition, Intelligence", "images/people/LeonKiesgen_MA-RCI.jpg"),
+	new Member("Marios Spanakakis", "Master of Science (M.Sc.) Mechatronics & Robotics", "images/people/MariosSpanakakis_MasterMechatronicsAndRobotics.png"),
+	new Member("Vincent Bürgin", "Master of Science (M.Sc.) Informatics", "images/people/VincentBürgin-MasterInformatics.jpg"),
+	new Member("Sonja Groß", "PhD Munich Institute of Robotics and Machine Intelligence (MIRMI)", "images/people/SonjaGroß_MSc_Biomedical_Engineering.jpg"),
+	new Member("Silija Breimann", "Master of Science (M.Sc.) Mechatronics & Robotics", "images/people/SilijaBreimann_MasterMechatronicsAndRobotics.jpg"),
+	new Member("Negar Shahmoradi", "Master of Science (M.Sc.) MS-Medizintechnik", "images/people/NegarShahmoradi_MS-Medizintechnik.jpg"),
+]
+
+shuffleArray(members)
 </script>
 
 <template>
@@ -107,7 +134,18 @@ import HelloWorld from './components/HelloWorld.vue'
 		<div class="max-w-2xl mx-auto py-24 px-4 grid items-center grid-cols-1 gap-y-16 gap-x-8 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8 ">
 			<h2 class="text-center text-3xl font-bold tracking-tight text-gray-900 sm:tracking-tight sm:text-4xl">Meet our Team 👨‍👩‍👧‍👧</h2>
 			<div class="flex gap-6 flex-wrap justify-center "  >
-				<!--Card 1-->
+				<div v-for="member in members" v-bind:key="member.name" class="w-60 rounded overflow-hidden shadow-lg">
+					<img class="w-full" :src=member.imagePath alt="Team member profile picture">
+					<div class="px-6 py-4">
+					<div class="font-bold text-xl mb-2">{{member.name}}</div>
+					<p class="text-gray-700 text-base">
+						{{member.studies}}
+					</p>
+					</div>
+				</div>
+
+
+				<!-- Card 1
 				<div class="w-60 rounded overflow-hidden shadow-lg">
 					<img class="w-full" src="images/people/JohannesFrey-MA-RCI.jpg" alt="Mountain">
 					<div class="px-6 py-4">
@@ -117,7 +155,6 @@ import HelloWorld from './components/HelloWorld.vue'
 					</p>
 					</div>
 				</div>
-				<!--Card 2-->
 				<div class="w-60 rounded overflow-hidden shadow-lg">
 					<img class="w-full" src="images/people/LeonKiesgen_MA-RCI.jpg" alt="Mountain">
 					<div class="px-6 py-4">
@@ -127,7 +164,6 @@ import HelloWorld from './components/HelloWorld.vue'
 					</p>
 					</div>
 				</div>
-				<!--Card 3-->
 				<div class="w-60 rounded overflow-hidden shadow-lg">
 					<img class="w-full" src="images/people/MariosSpanakakis_MasterMechatronicsAndRobotics.png" alt="Mountain">
 					<div class="px-6 py-4">
@@ -138,7 +174,6 @@ import HelloWorld from './components/HelloWorld.vue'
 					</div>
 				</div>
 
-				<!--Card 4-->
 				<div class="w-60 rounded overflow-hidden shadow-lg">
 					<img class="w-full" src="images/people/VincentBürgin-MasterInformatics.jpg" alt="Mountain">
 					<div class="px-6 py-4">
@@ -149,18 +184,16 @@ import HelloWorld from './components/HelloWorld.vue'
 					</div>
 				</div>
 
-				<!--Card 5-->
 				<div class="w-60 rounded overflow-hidden shadow-lg">
 					<img class="w-full" src="images/people/SonjaGroß_MSc_Biomedical_Engineering.jpg" alt="Mountain">
 					<div class="px-6 py-4">
 					<div class="font-bold text-xl mb-2">Sonja Groß</div>
 					<p class="text-gray-700 text-base">
-						PhD Munich Institute of Robotics and Machine Intelligence (Mirmi)
+						PhD Munich Institute of Robotics and Machine Intelligence (MIRMI)
 					</p>
 					</div>
 				</div>
 
-				<!--Card 6-->
 				<div class="w-60 rounded overflow-hidden shadow-lg">
 					<img class="w-full" src="images/people/SilijaBreimann_MasterMechatronicsAndRobotics.jpg" alt="Mountain">
 					<div class="px-6 py-4">
@@ -171,7 +204,6 @@ import HelloWorld from './components/HelloWorld.vue'
 					</div>
 				</div>
 				
-				<!--Card 7-->
 				<div class="w-60 rounded overflow-hidden shadow-lg">
 					<img class="w-full" src="images/people/NegarShahmoradi_MS-Medizintechnik.jpg" alt="Mountain">
 					<div class="px-6 py-4">
@@ -180,7 +212,7 @@ import HelloWorld from './components/HelloWorld.vue'
 						Master of Science (M.Sc.) MS-Medizintechnik
 					</p>
 					</div>
-				</div>
+				</div> -->
 				
 
 		</div>
